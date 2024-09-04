@@ -8,6 +8,12 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UseMaui>true</UseMaui>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
+		<RuntimeIdentifier>iossimulator-arm64</RuntimeIdentifier>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<EnableSGenConc>True</EnableSGenConc>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,11 +1,12 @@
 ﻿namespace SmartGrowHub.Maui;
 
-public partial class App : Application
+public sealed partial class App
 {
-	public App()
-	{
-		InitializeComponent();
+    public App(Shell shell)
+    {
+        InitializeComponent();
 
-		MainPage = new AppShell();
-	}
+        UserAppTheme = AppTheme.Light;
+        MainPage = shell;
+    }
 }
