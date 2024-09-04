@@ -1,0 +1,21 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/SmartGrowHub.Domain/bin
+/SmartGrowHub.Domain/obj
+/SmartGrowHub.Maui/SmartGrowHub.Maui/bin
+/SmartGrowHub.Maui/SmartGrowHub.Maui/obj
+/SmartGrowHub.Maui/SmartGrowHub.Maui.Droid/bin
+/SmartGrowHub.Maui/SmartGrowHub.Maui.Droid/obj
+/SmartGrowHub.Maui/SmartGrowHub.Maui.iOS/bin
+/SmartGrowHub.Maui/SmartGrowHub.Maui.iOS/obj
+/SmartGrowHub.Shared/bin
+/SmartGrowHub.Shared/obj
+/SmartGrowHub.WebApi/bin
+/SmartGrowHub.WebApi/obj
+/SmartGrowHub.WebApi.Application/bin
+/SmartGrowHub.WebApi.Application/obj
+/SmartGrowHub.WebApi.Infrastructure/bin
+/SmartGrowHub.WebApi.Infrastructure/obj
