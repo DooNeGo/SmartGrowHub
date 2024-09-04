@@ -19,7 +19,9 @@ public static class MauiProgramExtensions
                 fonts.AddFont("Inter-18pt-SemiBold.ttf", "Inter18SemiBold");
             });
 
-        builder.Services.AddUi();
+        builder.Services
+            .AddUi()
+            .AddServices();
 
 #if DEBUG
         builder.Logging.AddDebug();

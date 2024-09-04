@@ -68,6 +68,9 @@
 		<MauiXaml Update="Features\Register\View\RegisterPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Features\Register\View\RoundImageButton.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Features\Start\View\StartPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

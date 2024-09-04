@@ -13,9 +13,13 @@ internal static class DependencyInjection
 {
     public static IServiceCollection AddUi(this IServiceCollection services) =>
         services
-            .AddSingleton<IIdentityService, IdentityService>()
-            .AddSingleton<Shell>(new AppShell())
             .AddTransientWithShellRoute<LogInPage, LogInPageModel>(nameof(LogInPageModel))
             .AddTransientWithShellRoute<StartPage, StartPageModel>(nameof(StartPageModel))
             .AddTransientWithShellRoute<RegisterPage, RegisterPageModel>(nameof(RegisterPageModel));
+
+    public static IServiceCollection AddServices(this IServiceCollection services) =>
+        services
+            .AddSingleton<IIdentityService, IdentityService>()
+            .AddSingleton<Shell>(new AppShell())
+            .AddSingleton(SecureStorage.Default);
 }

@@ -196,15 +196,6 @@ namespace SmartGrowHub.Maui.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на .
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на User name.
         /// </summary>
         internal static string UserName {

@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControls="clr-namespace:SmartGrowHub.Maui.CustomControls"
+    xmlns:local="clr-namespace:SmartGrowHub.Maui.Features.Register.View"
     xmlns:localization="clr-namespace:SmartGrowHub.Maui.Localization"
     xmlns:viewModel="clr-namespace:SmartGrowHub.Maui.Features.Register.ViewModel"
     x:DataType="viewModel:RegisterPageModel"
@@ -36,45 +37,16 @@
             <VerticalStackLayout Grid.Row="2" Spacing="40">
                 <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="10">
                     <BoxView Grid.Column="0" Style="{StaticResource Divider}" />
-                    <Label Grid.Column="1" FontFamily="Inter18Medium" Text="{x:Static localization:Resources.OrContinueWith}" />
+                    <Label
+                        Grid.Column="1"
+                        FontFamily="Inter18Medium"
+                        Text="{x:Static localization:Resources.OrContinueWith}" />
                     <BoxView Grid.Column="2" Style="{StaticResource Divider}" />
                 </Grid>
 
                 <Grid ColumnDefinitions="*,*">
-                    <ImageButton
-                        Margin="0"
-                        Padding="14"
-                        BackgroundColor="White"
-                        CornerRadius="25"
-                        HeightRequest="50"
-                        HorizontalOptions="Center"
-                        Source="google_icon.png"
-                        WidthRequest="50">
-                        <ImageButton.Shadow>
-                            <Shadow
-                                Brush="Black"
-                                Opacity="0.15"
-                                Offset="0,3" />
-                        </ImageButton.Shadow>
-                    </ImageButton>
-
-                    <ImageButton
-                        Grid.Column="1"
-                        Margin="0"
-                        Padding="12"
-                        BackgroundColor="White"
-                        CornerRadius="25"
-                        HeightRequest="50"
-                        HorizontalOptions="Center"
-                        Source="apple_icon.png"
-                        WidthRequest="50">
-                        <ImageButton.Shadow>
-                            <Shadow
-                                Brush="Black"
-                                Opacity="0.15"
-                                Offset="0,3" />
-                        </ImageButton.Shadow>
-                    </ImageButton>
+                    <local:RoundImageButton ImageSource="google_icon.png" />
+                    <local:RoundImageButton Grid.Column="1" ImageSource="apple_icon.png" />
                 </Grid>
 
                 <customControls:TextButton
