@@ -39,6 +39,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\SmartGrowHub.Domain\SmartGrowHub.Domain.csproj" />
+	  <ProjectReference Include="..\..\SmartGrowHub.Shared\SmartGrowHub.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Compile Update="Localization\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
@@ -66,6 +71,10 @@
 		<MauiXaml Update="Features\Start\View\StartPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\LogIn\Model\" />
 	</ItemGroup>
 
 </Project>
