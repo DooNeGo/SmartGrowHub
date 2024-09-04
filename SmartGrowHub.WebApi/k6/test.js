@@ -16,6 +16,13 @@ const registerRequest = {
     displayName: "DooNeGo"
 }
 
+const logInRequest = {
+    userName: "DooNeGo123",
+    password: "qwerty123123",
+    email: "asdasd@gmail.com",
+    displayName: "DooNeGo"
+}
+
 export default function () {
-    http.post(config.API_REGISTER_URL, registerRequest);
+    http.post(config.API_LOGIN_URL, logInRequest);
 }

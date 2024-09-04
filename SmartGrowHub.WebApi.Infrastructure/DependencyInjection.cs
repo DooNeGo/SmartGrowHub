@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using SmartGrowHub.WebApi.Application.Interfaces;
 using SmartGrowHub.WebApi.Infrastructure.Data;
 using SmartGrowHub.WebApi.Infrastructure.Services;
@@ -13,5 +12,6 @@ public static class DependencyInjection
             .AddDbContextPool<ApplicationContext>(options => { })
             .AddTransient<ITokenService, TokenService>()
             .AddTransient<IUserService, UserService>()
-            .AddTransient<IAuthService, AuthService>();
+            .AddTransient<IAuthService, AuthService>()
+            .AddTransient<IPasswordHasher, PasswordHasher>();
 }
