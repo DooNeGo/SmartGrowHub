@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Путь к файлу сообщения коммита
+COMMIT_MSG_FILE="$1"
+
+# Получаем список измененных файлов в индексе
+CHANGED_FILES=$(git diff --cached --name-only)
+
+# Инициализируем массив для хранения префиксов
+PREFIXES=()
+
+# Определяем префиксы в зависимости от измененных директорий
+if echo "$CHANGED_FILES" | grep -q "^SmartGrowHub.WebApi*"; then
+  PREFIXES+=("[API]")
+fi
+
+if echo "$CHANGED_FILES" | grep -q "^SmartGrowHub.Maui*"; then
+  PREFIXES+=("[MAUI]")
+fi
+
+if echo "$CHANGED_FILES" | grep -q "^SmartGrowHub.Shared"; then
+  PREFIXES+=("[SHARED]")
+fi
+
+if echo "$CHANGED_FILES" | grep -q "^SmartGrowHub.Domain"; then
+  PREFIXES+=("[DOMAIN]")
+fi
+
+# Проверяем, нужно ли добавлять префиксы к сообщению коммита
+if [ ${#PREFIXES[@]} -ne 0 ]; then
+  # Объединяем все префиксы в строку
+  PREFIX_STRING=$(IFS=" "; echo "${PREFIXES[*]}")
+
+  # Чтение текущего сообщения коммита
+  COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+  # Запись префиксов и текущего сообщения коммита обратно в файл
+  echo "$PREFIX_STRING $COMMIT_MSG" > "$COMMIT_MSG_FILE"
+fi
