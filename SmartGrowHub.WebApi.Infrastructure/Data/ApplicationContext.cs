@@ -1,22 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartGrowHub.WebApi.Infrastructure.Data.CompiledModels;
 using SmartGrowHub.WebApi.Infrastructure.Data.Convertors;
 using SmartGrowHub.WebApi.Infrastructure.Data.Model;
 
 namespace SmartGrowHub.WebApi.Infrastructure.Data;
 
-internal sealed class ApplicationContext : DbContext
+internal sealed class ApplicationContext(DbContextOptions<ApplicationContext> options)
+    : DbContext(options)
 {
-    private const string ConnectionString =
-        @"Server=(localdb)\mssqllocaldb;Database=SmartGrowHubDb;Trusted_Connection=True;";
-
-    public ApplicationContext() { }
-
-    public ApplicationContext(DbContextOptions<ApplicationContext> options)
-    {
-        
-    }
-
     public DbSet<UserDb> Users => Set<UserDb>();
 
     public DbSet<GrowHubDb> GrowHubs => Set<GrowHubDb>();
@@ -28,15 +18,6 @@ internal sealed class ApplicationContext : DbContext
     public DbSet<SensorReadingDb> SensorReading => Set<SensorReadingDb>();
 
     public DbSet<ComponentDb> Components => Set<ComponentDb>();
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-
-        optionsBuilder
-            .UseSqlServer(ConnectionString)
-            .UseModel(ApplicationContextModel.Instance);
-    }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {

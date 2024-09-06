@@ -1,4 +1,4 @@
-﻿using SmartGrowHub.WebApi.Application.Interfaces;
+﻿using SmartGrowHub.WebApi.Application.Interfaces.Services;
 using System.Security.Cryptography;
 
 namespace SmartGrowHub.WebApi.Infrastructure.Services;

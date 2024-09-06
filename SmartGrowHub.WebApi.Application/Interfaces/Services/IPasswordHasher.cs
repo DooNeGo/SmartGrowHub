@@ -1,4 +1,4 @@
-﻿namespace SmartGrowHub.WebApi.Application.Interfaces;
+﻿namespace SmartGrowHub.WebApi.Application.Interfaces.Services;
 
 public interface IPasswordHasher
 {

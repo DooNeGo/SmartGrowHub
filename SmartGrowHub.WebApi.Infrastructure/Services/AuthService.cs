@@ -1,46 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using SmartGrowHub.Domain.Common;
+using SmartGrowHub.Domain.Exceptions;
+using SmartGrowHub.Domain.Model;
 using SmartGrowHub.Domain.Requests;
 using SmartGrowHub.Domain.Responses;
-using SmartGrowHub.WebApi.Application.Interfaces;
-using SmartGrowHub.WebApi.Infrastructure.Data;
-using SmartGrowHub.WebApi.Infrastructure.Data.Model;
-using SmartGrowHub.WebApi.Infrastructure.Data.Model.Extensions;
+using SmartGrowHub.WebApi.Application.Interfaces.Services;
 
 namespace SmartGrowHub.WebApi.Infrastructure.Services;
 
 internal sealed class AuthService(
-    ApplicationContext context,
+    IUserService userService,
     ITokenService tokenService,
     IPasswordHasher passwordHasher)
     : IAuthService
 {
-    public TryOptionAsync<Fin<LogInResponse>> LogInAsync(LogInRequest request, CancellationToken cancellationToken) =>
-        context.Users
-            .Where(user => user.UserName == request.UserName.Value)
-            .SingleOrDefaultAsync(cancellationToken)
-            .Map(Optional)
-            .Map(option => option
-                .Bind(user => passwordHasher.Verify(request.Password, user.Password)
-                    ? Some(user) : None))
-            .ToTryOptionAsync()
-            .Map(user => user
-                .TryToDomain()
-                .Map(user => new LogInResponse(user,
-                    tokenService.CreateToken(user))));
+    public EitherAsync<Exception, LogInResponse> LogInAsync(LogInRequest request, CancellationToken cancellationToken) =>
+        userService.GetAsync(request.UserName, cancellationToken)
+            .Bind<User>(user => passwordHasher
+                .Verify(request.Password, user.Password)
+                    ? user
+                    : new ItemNotFoundException(nameof(User), None))
+            .Map(user => new LogInResponse(user.Id, tokenService.CreateToken(user)));
 
-    public EitherAsync<Error, RegisterResponse> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken)
-    {
-        UserDb userDb = request.User.ToDb();
-        string hashedPassword = passwordHasher.GetHash(userDb.Password);
-        context.Add(userDb with { Password = hashedPassword });
-
-        return TryAsync(context.SaveChangesAsync(cancellationToken)
-            .Map(_ => new RegisterResponse()))
-            .ToEither()
-            .MapLeft(error => error.Exception
-                .Map(exception => exception is DbUpdateException
-                    ? Error.New("User already exists")
-                    : Error.New("Internal error"))
-                .IfNone(Error.New("Internal error")));
-    }
+    public EitherAsync<Exception, RegisterResponse> RegisterAsync(RegisterRequest request, CancellationToken cancellationToken) =>
+        Id(request.User)
+            .Map(user => user with { Password = (Password)passwordHasher.GetHash(user.Password) })
+            .Map(user => userService
+                .AddAsync(user, cancellationToken)
+                .Map(_ => new RegisterResponse()))
+            .Value;
 }

@@ -6,7 +6,7 @@ public sealed class UsersModule : IEndpointModule
 {
     public static IEndpointRouteBuilder AddEndpointsTo(IEndpointRouteBuilder routeBuilder)
     {
-        routeBuilder.MapGet("/user", GetUserEndpoint.GetUser);
+        routeBuilder.MapGet("/user", GetUserEndpoint.GetUser).RequireAuthorization();
 
         return routeBuilder;
     }
