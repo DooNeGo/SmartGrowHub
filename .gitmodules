@@ -1,0 +1,6 @@
+[submodule "SmartGrowHub.WebApi"]
+	path = SmartGrowHub.WebApi
+	url = https://github.com/DooNeGo/SmartGrowHub.WebApi
+[submodule "SmartGrowHub.Maui"]
+	path = SmartGrowHub.Maui
+	url = https://github.com/DooNeGo/SmartGrowHub.Maui
